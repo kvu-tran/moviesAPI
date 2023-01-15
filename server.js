@@ -8,7 +8,7 @@
 * Student ID:   111314209
 * Date:         2023/01/15
 *
-* Cyclic Link:  https://sheltered-sierra-02714.herokuapp.com/
+* Cyclic Link:  https://mysterious-bull-undershirt.cyclic.app
 *
 ********************************************************************************/
 
@@ -26,7 +26,7 @@ app.use(BodyParser.json());
 
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
-const MovieDB = require("./modules/moviesDB.js");
+const MovieDB = require("./modules/movieDB.js");
 const db = new MovieDB();
 
 require("dotenv").config({ path: "./config/config.env" });
