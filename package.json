@@ -3,5 +3,23 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "mongoose": "^6.8.3"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "moviesapi",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvu-tran/moviesAPI.git"
+  },
+  "author": "kvu-tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kvu-tran/moviesAPI/issues"
+  },
+  "homepage": "https://github.com/kvu-tran/moviesAPI#readme",
+  "description": ""
 }
