@@ -26,7 +26,7 @@ app.use(BodyParser.json());
 
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
-const MovieDB = require("./modules/movieDB.js");
+const MovieDB = require("./modules/moviesDB.js");
 const db = new MovieDB();
 
 require("dotenv").config({ path: "./config/config.env" });
