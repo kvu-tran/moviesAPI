@@ -26,9 +26,10 @@ app.use(BodyParser.json());
 
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
-const MovieDB = require("./modules/movieDB.js");
-const db = new MovieDB();
+const MoviesDB = require("./modules/moviesDB.js");
+const db = new MoviesDB();
 
+//require("dotenv").config({ path: "./config/config.env" });
 require("dotenv").config({ path: "./config/config.env" });
 
 // db.initialize('mongodb+srv://${process.env.dbUser}:${process.env.dbPass}@cluster0-apgkj.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority')
