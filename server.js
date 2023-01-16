@@ -26,23 +26,24 @@ app.use(BodyParser.json());
 
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
-const MoviesDB = require('./modules/moviesDB.js');
+const MoviesDB = require("./modules/moviesDB.js");
 const db = new MoviesDB();
 
-require('dotenv').config({ path: './config/config.env' });
+//require("dotenv").config({ path: "./config/config.env" });
+require("dotenv").config({ path: "./config/config.env" });
 
-db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
-
-    app.listen(HTTP_PORT, () => {
-        console.log('Ready to handle requests on port ' + HTTP_PORT);
-    });
+// db.initialize('mongodb+srv://${process.env.dbUser}:${process.env.dbPass}@cluster0-apgkj.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority')
+db.initialize("mongodb+srv://kevin:226ruggles@senecaweb.sidn0.mongodb.net/sample_mflix?retryWrites=true&w=majority")
+//db.initialize(process.env.MONGODB_CONN_STRING)
+.then(() => {
+  app.listen(process.env.PORT, () => {
+    console.log('server listening');
+  });
 }).catch((err) => {
-    console.log(err);
+  console.log(err);
 });
 
-app.get('/', (req, res) => {
-    res.json(({message: "API Listening"}));
-});
+// ------------------------------------------------------------------------------------------
 
 app.post("/api/movies",(req, res) => {
     db.addNewMovie(req.body)
@@ -54,7 +55,7 @@ app.post("/api/movies",(req, res) => {
       });
   });
 
-app.get('/api/movies', celebrate({
+app.get("/api/movies", celebrate({
   [Segments.QUERY]: Joi.object().keys({
     page: Joi.number().required(),
     perPage: Joi.number().required(),
@@ -79,7 +80,7 @@ app.use((error, req, res, next) => {
   return res.status(500).send(error)
 })
 
-app.get('/api/movies/:_id', (req, res) => {
+app.get("/api/movies/:_id", (req, res) => {
   db.getMovieById(req.params._id)
     .then((movies) => {
       res.status(200).json(movies);
@@ -90,7 +91,7 @@ app.get('/api/movies/:_id', (req, res) => {
 });
 
 
-app.put('/api/movies/:_id', (req, res) => {
+app.put("/api/movies/:_id", (req, res) => {
   db.updateMovieById(req.body, req.params._id)
     .then(() => {
       res.status(200).json('Movie (${req.params._id}) successfully updated');
@@ -100,7 +101,7 @@ app.put('/api/movies/:_id', (req, res) => {
     });
 });
 
-app.delete('/api/movies/:_id', (req, res) => {
+app.delete("/api/movies/:_id", (req, res) => {
   db.deleteMovieById(req.params._id)
     .then(() => {
       res.status(200).json('Movie (${req.params._id}) successfully deleted');
@@ -110,3 +111,7 @@ app.delete('/api/movies/:_id', (req, res) => {
     });
 });
 
+app.get('/', (req, res) => {
+  //res.sendFile(path.join(__dirname, "./index.html"))
+  res.json(({message: "API Listening"}));
+})
