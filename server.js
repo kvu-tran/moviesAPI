@@ -34,11 +34,11 @@ const db = new MoviesDB();
 require("dotenv").config({ path: "./config/config.env" });
 
 // db.initialize('mongodb+srv://${process.env.dbUser}:${process.env.dbPass}@cluster0-apgkj.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority')
-db.initialize("mongodb+srv://kevin:226ruggles@senecaweb.sidn0.mongodb.net/sample_mflix?retryWrites=true&w=majority")
-//db.initialize(process.env.MONGODB_CONN_STRING)
-.then(() => {
+//db.initialize("mongodb+srv://kevin:226ruggles@senecaweb.sidn0.mongodb.net/sample_mflix?retryWrites=true&w=majority")
+db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
   app.listen(process.env.PORT, () => {
-    console.log('server listening');
+    //console.log('server listening');
+    console.log('Ready to handle requests on port ' + HTTP_PORT);
   });
 }).catch((err) => {
   console.log(err);
