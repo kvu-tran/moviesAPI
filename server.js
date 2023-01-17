@@ -57,7 +57,7 @@ app.post("/api/movies",(req, res) => {
 
 app.get("/api/movies", (req, res) => {
     if (!req.query.page || !req.query.perPage)
-      res.status(500).json({ error: "Please enter page num and num per page." });
+      res.status(500).json({ error: "Please enter page # and perPage #." });
     else {
       db.getAllMovies(req.query.page, req.query.perPage, req.query.title)
         .then((data) => {
