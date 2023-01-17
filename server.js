@@ -75,7 +75,7 @@ app.use((error, req, res, next) => {
 })
 
 app.get("/api/movies/:id", (req, res) => {
-  db.getMovieById(req.params._id)
+  db.getMovieById(req.params.id)
     .then((movies) => {
       res.status(200).json(movies);
     })
@@ -86,9 +86,9 @@ app.get("/api/movies/:id", (req, res) => {
 
 
 app.put("/api/movies/:id", (req, res) => {
-  db.updateMovieById(req.body, req.params._id)
+  db.updateMovieById(req.body, req.params.id)
     .then(() => {
-      res.status(200).json('Movie (${req.params._id}) successfully updated');
+      res.status(200).json('Movie (${req.params.id}) successfully updated');
     })
     .catch((err) => {
       res.status(500).json('Error has occured : ${err}');
@@ -96,9 +96,9 @@ app.put("/api/movies/:id", (req, res) => {
 });
 
 app.delete("/api/movies/:id", (req, res) => {
-  db.deleteMovieById(req.params._id)
+  db.deleteMovieById(req.params.id)
     .then(() => {
-      res.status(200).json('Movie (${req.params._id}) successfully deleted');
+      res.status(200).json('Movie (${req.params.id}) successfully deleted');
     })
     .catch((err) => {
       res.status(500).json('Error has occured : ${err}');
