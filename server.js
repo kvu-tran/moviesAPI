@@ -74,7 +74,7 @@ app.use((error, req, res, next) => {
   return res.status(500).send(error)
 })
 
-app.get("/api/movies/:_id", (req, res) => {
+app.get("/api/movies/:id", (req, res) => {
   db.getMovieById(req.params._id)
     .then((movies) => {
       res.status(200).json(movies);
@@ -85,7 +85,7 @@ app.get("/api/movies/:_id", (req, res) => {
 });
 
 
-app.put("/api/movies/:_id", (req, res) => {
+app.put("/api/movies/:id", (req, res) => {
   db.updateMovieById(req.body, req.params._id)
     .then(() => {
       res.status(200).json('Movie (${req.params._id}) successfully updated');
@@ -95,7 +95,7 @@ app.put("/api/movies/:_id", (req, res) => {
     });
 });
 
-app.delete("/api/movies/:_id", (req, res) => {
+app.delete("/api/movies/:id", (req, res) => {
   db.deleteMovieById(req.params._id)
     .then(() => {
       res.status(200).json('Movie (${req.params._id}) successfully deleted');
