@@ -32,7 +32,7 @@ const MoviesDB = require("./modules/moviesDB.js");
 const db = new MoviesDB();
 
 //require("dotenv").config({ path: "./config/config.env" });
-require("dotenv").config({ path: "./config/config.env" });
+require("dotenv").config();
 
 // db.initialize('mongodb+srv://${process.env.dbUser}:${process.env.dbPass}@cluster0-apgkj.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority')
 //db.initialize("mongodb+srv://kevin:226ruggles@senecaweb.sidn0.mongodb.net/sample_mflix?retryWrites=true&w=majority")
