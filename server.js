@@ -24,28 +24,21 @@ app.use(express.json());
 
 const BodyParser = require('body-parser');
 app.use(BodyParser.json());
-// const HTTP_PORT = process.env.PORT || 8080;
 
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
 const MoviesDB = require("./modules/moviesDB.js");
 const db = new MoviesDB();
 
-//require("dotenv").config({ path: "./config/config.env" });
 require("dotenv").config();
 
-// db.initialize('mongodb+srv://${process.env.dbUser}:${process.env.dbPass}@cluster0-apgkj.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority')
-//db.initialize("mongodb+srv://kevin:226ruggles@senecaweb.sidn0.mongodb.net/sample_mflix?retryWrites=true&w=majority")
 db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
   app.listen(process.env.PORT, () => {
-    //console.log('server listening');
     console.log('Ready to handle requests on port ' + HTTP_PORT);
   });
 }).catch((err) => {
   console.log(err);
 });
-
-// ------------------------------------------------------------------------------------------
 
 app.post("/api/movies",(req, res) => {
     db.addNewMovie(req.body)
@@ -57,20 +50,19 @@ app.post("/api/movies",(req, res) => {
       });
   });
 
-app.get("/api/movies", celebrate({
-  [Segments.QUERY]: Joi.object().keys({
-    page: Joi.number().required(),
-    perPage: Joi.number().required(),
-    borough: Joi.string()
-  })
-}), (req, res) => {
-  db.getAllMovies(req.query.page, req.query.perPage, req.query.borough)
-    .then((movies) => {
-      res.status(200).json(movies).sort(movies.movie_id);
-    })
-    .catch((err) => {
-      res.status(500).json('Error has occured : ${err}');
-    });
+app.get("/api/movies", (req, res) => {
+    if (!req.query.page || !req.query.perPage)
+      res.status(500).json({ error: "Query Parameters Needed." });
+    else {
+      db.getAllMovies(req.query.page, req.query.perPage, req.query.title)
+        .then((data) => {
+          if (!data) res.status(204).json({ message: "No data found" });
+          else res.status(200).json(data);
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err });
+        });
+    }
 });
 
 app.use((error, req, res, next) => {
@@ -114,6 +106,9 @@ app.delete("/api/movies/:_id", (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  //res.sendFile(path.join(__dirname, "./index.html"))
   res.json(({message: "API Listening"}));
 })
+
+app.get("/home", (req, res) => {
+  res.json({ message: "API Listening" });
+});
