@@ -17,7 +17,6 @@
 *   https://mysterious-bull-undershirt.cyclic.app/api/movies?page=1&perPage=5&title=Newark%20Athlete
 *   https://mysterious-bull-undershirt.cyclic.app/api/movies/573a1391f29313caabcd956e
 ********************************************************************************/
-
 const express = require("express");
 const app = express();
 const cors = require('cors');
