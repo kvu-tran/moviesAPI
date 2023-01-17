@@ -39,7 +39,7 @@ require("dotenv").config();
 
 db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
   app.listen(process.env.PORT, () => {
-    console.log('Ready to handle requests on port ' + HTTP_PORT);
+    console.log('Listening on port ' + HTTP_PORT);
   });
 }).catch((err) => {
   console.log(err);
@@ -57,7 +57,7 @@ app.post("/api/movies",(req, res) => {
 
 app.get("/api/movies", (req, res) => {
     if (!req.query.page || !req.query.perPage)
-      res.status(500).json({ error: "Query Parameters Needed." });
+      res.status(500).json({ error: "Please enter page num and num per page." });
     else {
       db.getAllMovies(req.query.page, req.query.perPage, req.query.title)
         .then((data) => {
