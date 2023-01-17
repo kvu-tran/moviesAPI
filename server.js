@@ -35,7 +35,6 @@ const MoviesDB = require("./modules/moviesDB.js");
 const db = new MoviesDB();
 
 require("dotenv").config();
-const { MONGODB_CONN_STRING } = process.env;
 
 db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
   app.listen(process.env.PORT, () => {
