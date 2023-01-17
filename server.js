@@ -9,8 +9,13 @@
 * Date:         2023/01/15
 *
 * Cyclic Link:  https://mysterious-bull-undershirt.cyclic.app
-* Code Repository: https://github.com/kvu-tran/moviesAPI
+* Github Link:  https://github.com/kvu-tran/moviesAPI
 *
+********************************************************************************
+* Sample URLs testing:
+*   https://mysterious-bull-undershirt.cyclic.app/api/movies?page=2&perPage=5
+*   https://mysterious-bull-undershirt.cyclic.app/api/movies?page=1&perPage=5&title=Newark%20Athlete
+*   https://mysterious-bull-undershirt.cyclic.app/api/movies/573a1391f29313caabcd956e
 ********************************************************************************/
 
 const express = require("express");
