@@ -22,5 +22,6 @@
     "url": "https://github.com/kvu-tran/moviesAPI/issues"
   },
   "homepage": "https://github.com/kvu-tran/moviesAPI#readme",
+  "devDependencies": {},
   "description": ""
 }

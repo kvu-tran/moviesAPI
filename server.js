@@ -37,7 +37,7 @@ const db = new MoviesDB();
 require("dotenv").config();
 
 db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
-  app.listen(process.env.PORT, () => {
+  app.listen(HTTP_PORT, () => {
     console.log('Listening on port ' + HTTP_PORT);
   });
 }).catch((err) => {
